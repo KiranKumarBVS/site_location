@@ -1,4 +1,0 @@
-services:
-  site_location.current_time:
-    class: Drupal\site_location\Service\CurrentTimeService
-    arguments: []
