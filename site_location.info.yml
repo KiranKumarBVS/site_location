@@ -1,6 +1,0 @@
-name: Site location
-type: module
-description: Able to see the Site location and the current time for the location.
-package: Custom
-core: 8.x
-core_version_requirement: ^8 || ^9
