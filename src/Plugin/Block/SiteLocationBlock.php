@@ -7,6 +7,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\site_location\Service\CurrentTimeService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Provides an Site location block.
@@ -94,21 +95,14 @@ class SiteLocationBlock extends BlockBase implements ContainerFactoryPluginInter
     $build = [
       '#theme' => 'site_location_rendering',
       '#date_value' => $data[0],
-      // '#cache' => [
-      //   'max-age' => 0,
-      // ],
+      '#cache' => [
+        'tags' => [
+          'config:site_location.settings',
+        ],
+      ],
     ];
 
     return $build;
-  }
-
-  /**
-   * Disable caching for this block.
-   *
-   * {@inheritdoc}
-   */
-  public function getCacheMaxAge() {
-    return 0;
   }
 
 }
