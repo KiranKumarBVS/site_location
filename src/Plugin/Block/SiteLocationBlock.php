@@ -90,12 +90,14 @@ class SiteLocationBlock extends BlockBase implements ContainerFactoryPluginInter
     // Used DI to render the timezone value from the CONFIG FORM.
     $time_zone = $this->configFactory->get('site_location.settings')->get('timezone');
     // Used DI to get the formatted date by calling the service.
-    $data = $this->currentTimeService->getCurrentTime($time_zone);
+    $date_time = $this->currentTimeService->getCurrentTime($time_zone);
 
     $build = [
       '#theme' => 'site_location_rendering',
-      '#date_value' => $data[0],
+      '#timezone_value' => $time_zone,
+      '#date_value' => $date_time,
       '#cache' => [
+        'max-age' => 60,
         'tags' => [
           'config:site_location.settings',
         ],
@@ -104,5 +106,14 @@ class SiteLocationBlock extends BlockBase implements ContainerFactoryPluginInter
 
     return $build;
   }
+
+  /**
+   * Disable caching for this block.
+   *
+   * {@inheritdoc}
+   */
+  // public function getCacheMaxAge() {
+  //   return 0;
+  // }
 
 }

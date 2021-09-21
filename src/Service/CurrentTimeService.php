@@ -29,12 +29,8 @@ class CurrentTimeService {
     $date = new DrupalDateTime();
     $time_stamp = $date->setTimezone(new \DateTimeZone($time_zone));
     $date_time = $time_stamp->format('jS M Y - g:i A');
-    $array_datetime[] = [
-      $time_zone,
-      $date_time,
-    ];
 
-    return $array_datetime;
+    return $date_time;
   }
 
 }
